@@ -22,7 +22,7 @@ public class AGSTSP
                 numGen = contadorGen;
             }
             //System.out.println("Generación: " +contadorGen +"; Fitness del fittest: " +pob.getFittest().getFitness());
-            System.out.print(", " +pob.getFittest().getFitness());
+            //System.out.print(", " +pob.getFittest().getFitness());
             pob = Algoritmo.evoluciona(pob);
         }
         System.out.println(")");
