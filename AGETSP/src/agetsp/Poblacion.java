@@ -71,14 +71,15 @@ public class Poblacion {
         return this.getGenotipo(i);
     }
     
-    public double [] linealRanking(){
+    public double [] linealRanking()
+    {
         double [] res = new double [this.size()];
         int tam = this.size();
         double nmas, nmen;
         nmas = 1.1;
         nmen = 2 - nmas;
         for (int i = 0; i < tam; i++) {
-            res[i] = (1 / tam) * (nmas- (nmas -nmen)*(i)/(tam - 1));
+            res[i] = (1 /(double) tam) * (nmas- (nmas -nmen)*(i)/(tam - 1));
         }
         return res;
     }

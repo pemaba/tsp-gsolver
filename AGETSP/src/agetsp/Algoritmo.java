@@ -48,22 +48,21 @@ public class Algoritmo {
         
     }
     
-    private static void mutacion(Genotipo gen){
+    private static void mutacion(Genotipo gen) {
         int primero, segundo;
-        //for (int i = 0; i < gen.size(); i++){
-            if(Algoritmo.rnd.nextDouble() <= tasaMutacion ){
-                primero = 0;
-                segundo = 0;
-                while(primero==segundo){
-                    primero = (int)(Algoritmo.rnd.nextDouble()*numCiudades);
-                    segundo = (int)(Algoritmo.rnd.nextDouble()*numCiudades);
-                }
-                int var = gen.getGen(primero);
-                gen.setGen(primero,gen.getGen(segundo));
-                gen.setGen(segundo, var);
-                
+        
+        if(Algoritmo.rnd.nextDouble() <= tasaMutacion) {
+            primero = 0;
+            segundo = 0;
+            while(primero==segundo){
+                primero = (int)(Algoritmo.rnd.nextDouble()*numCiudades);
+                segundo = (int)(Algoritmo.rnd.nextDouble()*numCiudades);
             }
-        //}
+            int var = gen.getGen(primero);
+            gen.setGen(primero,gen.getGen(segundo));
+            gen.setGen(segundo, var);
+
+        }
     }
     
     private static Genotipo crossover(Genotipo A, Genotipo B)
@@ -87,6 +86,7 @@ public class Algoritmo {
         while(i < lugar1 && j<numCiudades) {
             if (!pasadas.contains(B.getGen(j))) {
                 hijo.setGen(i,B.getGen(i));
+                pasadas.add(B.getGen(j));
                 i++;
             }
             j++;
@@ -95,6 +95,7 @@ public class Algoritmo {
         while(i < numCiudades && j<numCiudades) {
             if( !pasadas.contains(B.getGen(j)) ) {
                 hijo.setGen(i,B.getGen(i));
+                pasadas.add(B.getGen(j));
                 i++;
             }
             j++;
@@ -102,5 +103,4 @@ public class Algoritmo {
         
         return hijo;
     }
-
 }
