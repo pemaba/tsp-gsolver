@@ -24,7 +24,7 @@ public class Fitness {
     }
     
     private static double distEntre2(int cdA, int cdB){
-        return distancias[cdA][cdB];
+        return distancias[cdA - 1][cdB - 1];
     }
     
     public static void init(String filename)

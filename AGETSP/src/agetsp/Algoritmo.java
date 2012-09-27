@@ -1,12 +1,12 @@
 
 package agetsp;
 
+import java.util.LinkedList;
 import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
-public class Algoritmo {
-    
+public class Algoritmo 
+{    
     private static double tasaUniforme = 1;
     private static double tasaMutacion = .03;
     //private static final int tamanoTorneo = 5;
@@ -54,14 +54,13 @@ public class Algoritmo {
         if(Algoritmo.rnd.nextDouble() <= tasaMutacion) {
             primero = 0;
             segundo = 0;
-            while(primero==segundo){
+            while(primero==segundo) {
                 primero = (int)(Algoritmo.rnd.nextDouble()*numCiudades);
                 segundo = (int)(Algoritmo.rnd.nextDouble()*numCiudades);
             }
             int var = gen.getGen(primero);
             gen.setGen(primero,gen.getGen(segundo));
             gen.setGen(segundo, var);
-
         }
     }
     
@@ -82,24 +81,16 @@ public class Algoritmo {
             pasadas.add(A.getGen(i));
             hijo.setGen(i, A.getGen(i));
         }
-        int i = 0, j = 0;
-        while(i < lugar1 && j<numCiudades) {
-            if (!pasadas.contains(B.getGen(j))) {
-                hijo.setGen(i,B.getGen(i));
-                pasadas.add(B.getGen(j));
-                i++;
-            }
-            j++;
+        LinkedList<Integer> faltantes = new LinkedList<>();
+        for(int i=0; i<B.size(); i++) {
+            if(!pasadas.contains(B.getGen(i)))
+                faltantes.addLast(B.getGen(i));
         }
-        i = lugar2 + 1;
-        while(i < numCiudades && j<numCiudades) {
-            if( !pasadas.contains(B.getGen(j)) ) {
-                hijo.setGen(i,B.getGen(i));
-                pasadas.add(B.getGen(j));
-                i++;
-            }
-            j++;
+        for(int i=0; i<hijo.size(); i++) {
+           if(hijo.getGen(i)==0)
+               hijo.setGen(i, faltantes.pop());
         }
+        
         
         return hijo;
     }

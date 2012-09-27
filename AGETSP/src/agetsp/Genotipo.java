@@ -28,14 +28,14 @@ public class Genotipo {
 
     //TODO: CHECAR
     public final void generaAleatorio() {
-        boolean[] usados = new boolean[Algoritmo.numCiudades];
+        boolean[] usados = new boolean[Algoritmo.numCiudades + 1];
         int pos, i;
         for (i = 0; i < Algoritmo.numCiudades; i++) {
             usados[i] = false;
         }
         i = 0;
         while (i < Algoritmo.numCiudades) {
-            pos = (int) (Algoritmo.numCiudades * Algoritmo.rnd.nextDouble());
+            pos = (int) (Algoritmo.numCiudades * Algoritmo.rnd.nextDouble()) + 1;
             if (!usados[pos]) {
                 genes[i] = pos;
                 i++;
@@ -77,9 +77,8 @@ public class Genotipo {
     }
 
     public double getFitness() {
-        if (fitness == null) {
+        if (fitness == null)
             fitness = Fitness.evaluaCamino(this);
-        }
 
         return fitness;
     }
